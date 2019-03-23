@@ -5,11 +5,6 @@ from masonite.request import Request
 
 
 class WelcomeController:
-
-    def __init__(self, request:Request):
-        if request.header('Access-Control-Allow-Origin') != '*':
-            request.header('Access-Control-Allow-Origin', '*')
-
     """Controller For Welcoming The User."""
 
     def show(self, view: View, request: Request):
