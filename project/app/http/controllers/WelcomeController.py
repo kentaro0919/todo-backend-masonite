@@ -2,7 +2,7 @@
 
 from masonite.view import View
 from masonite.request import Request
-
+from masonite.response import Response
 
 class WelcomeController:
     """Controller For Welcoming The User."""
@@ -20,3 +20,13 @@ class WelcomeController:
         return view.render('welcome', {
             'app': request.app().make('Application')
         })
+
+    def match(self, view: View, request: Request, response: Response):
+        print('===================')
+        headers = {
+            'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, PATCH, DELETE',
+            'Access-Control-Allow-Headers': 'Content-Type, X-Auth-Token, Origin, Authorization'
+        }
+        print(vars(response.request))
+        response.request._headers = headers
+        return response
