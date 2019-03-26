@@ -8,6 +8,6 @@ ROUTES = [
 
     RouteGroup([
         Get().route('/', 'WelcomeController@show').name('welcome'),
-        match(['OPTIONS'], '/', 'WelcomeController@match'),
+        match(['OPTIONS', 'HEAD'], '/', 'WelcomeController@match'),
     ])
 ]
