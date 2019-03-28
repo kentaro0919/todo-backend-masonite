@@ -1,4 +1,4 @@
-from masonite.routes import Get, Post, Delete, Patch, Redirect, RouteGroup
+from masonite.routes import Get, Post, Delete, Patch, RouteGroup
 
 ROUTES = [
     RouteGroup(

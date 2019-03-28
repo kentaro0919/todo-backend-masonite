@@ -5,20 +5,20 @@ from urllib.parse import urljoin
 
 
 class TodosController:
-    """Class Docstring Description
+    """Class TodosController
     """
 
     def __init__(self, request: Request):
         self.request = request
 
     def index(self):
-        """Get /
+        """Get / -> Todo.all()
         """
         return Todo.all()
 
     def create(self):
-        """Post /
-        'title', 'completed', 'url', 'order'
+        """POST / -> new_todo
+        
         """
         if self.request.input:
             print(self.request.input("title"))
@@ -37,6 +37,9 @@ class TodosController:
         return todo
 
     def update(self, request: Request):
+        """ /@id -> updated_todo
+        """
+        
         todo = Todo.find(request.param("id"))
         todo.title = self.request.input("title")
         todo.completed = self.request.input("completed")
@@ -46,8 +49,8 @@ class TodosController:
         return todo
 
     def deleteAll(self):
-        """Delete all existing resource listing
-        ex. Delete().route("/destroy", {{ class }})
+        """Delete /  ->  Todo.all().delete()
+
         """
 
         for i in Todo.all():
@@ -56,9 +59,7 @@ class TodosController:
         return Todo.all()
 
     def show(self):
-        """Show a single resource listing
-        ex. Model.find('id')
-            Get().route("/show", {{ class }}
+        """Get /@id -> todo
         """
         try:
             todo = Todo.find_or_fail(self.request.param("id"))
@@ -67,8 +68,7 @@ class TodosController:
             return []
 
     def delete(self):
-        """Delete an existing resource listing
-        ex. Delete().route("/destroy", {{ class }})
+        """Delete /@id ->  Todo.find().delete()
         """
 
         try:

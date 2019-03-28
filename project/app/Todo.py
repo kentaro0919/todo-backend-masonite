@@ -1,7 +1,7 @@
 """Todo Model"""
 
 from config.database import Model
-from orator.orm import mutator, accessor
+from orator.orm import  accessor
 
 class Todo(Model):
     """Todo Model"""
@@ -9,6 +9,8 @@ class Todo(Model):
     
     @accessor
     def completed(self):
+        """self.completed -> True or False
+        """
         completed = self.get_raw_attribute('completed')
         return False if completed == 0 else True
 
