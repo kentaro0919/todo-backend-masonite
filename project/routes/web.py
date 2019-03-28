@@ -1,13 +1,24 @@
-"""Web Routes."""
-
-from masonite.routes import Get, Post, RouteGroup
-from masonite.helpers.routes import get, post, put, patch, delete, match
+from masonite.routes import Get, Post, Delete, Patch, Redirect, RouteGroup
 
 ROUTES = [
-    #Get().route('/', 'WelcomeController@show').name('welcome'),
-
-    RouteGroup([
-        Get().route('/', 'WelcomeController@show').name('welcome'),
-        match(['OPTIONS', 'HEAD'], '/', 'WelcomeController@match'),
-    ])
-]
+    RouteGroup(
+        [
+            Get().route("", "TodosController@index"),
+            Post().route("", "TodosController@create"),
+            Delete().route("", "TodosController@deleteAll"),
+            ],
+        name="todos.",
+        prefix="/",
+        add_methods=["OPTIONS"],
+        ),
+    RouteGroup(
+        [
+            Get().route("@id", "TodosController@show"),
+            Patch().route("@id", "TodosController@update"),
+            Delete().route("@id", "TodosController@delete"),
+            ],
+        name="todo.",
+        prefix="/",
+        add_methods=["OPTIONS"],
+        ),
+    ]
